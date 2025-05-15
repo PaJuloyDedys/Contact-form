@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Contact form</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        font-size: 62.5%;
+      }
+
+      .attribution {
+        font-size: 1.2rem;
+        text-align: center;
+        width: 100vw;
+        position: fixed;
+        bottom: 0;
+        z-index: -1;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+
+      /* General */
+      body {
+        background-color: hsl(148, 38%, 91%);
+        font-size: 1.8rem;
+        font-family: "Karla", sans-serif;
+      }
+      section {
+        width: 60rem;
+        height: 100vh;
+        margin: auto;
+        transform: translateY(-35%);
+      }
+      .container {
+        transform: translateY(44%);
+        background-color: hsl(0, 0%, 100%);
+        border-radius: 2rem;
+        padding: 2.4rem;
+        position: relative;
+      }
+      form p {
+        font-size: 2.4rem;
+        font-weight: 700;
+        margin-bottom: 2.4rem;
+        color: #333;
+      }
+      .form-example {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        /* overflow: hidden; */
+      }
+      .form-example label {
+        margin-bottom: 1rem;
+        font-size: 1.6rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0.7px;
+      }
+      .form-example span {
+        color: hsl(169, 82%, 27%);
+      }
+
+      .form-example input {
+        padding: 1.5rem;
+        border: 1px solid #333;
+        border-radius: 1rem;
+      }
+
+      .input:hover {
+        cursor: pointer;
+        border: 2px solid hsl(169, 82%, 27%);
+        /* overflow: none; */
+      }
+      .input:active,
+      .input:focus {
+        border: 2px solid hsl(169, 82%, 27%);
+      }
+      .error-message {
+        color: #dc3545; /* red */
+        font-size: 1.4rem;
+        margin-top: 0.5rem;
+      }
+
+      input.error,
+      textarea.error,
+      input[type="checkbox"].error {
+        border: 2px solid #dc3545;
+        background-color: #ffe6e6;
+      }
+
+      /* Individual styles */
+
+      .first-last-name {
+        display: flex;
+        justify-content: space-between;
+      }
+      .first-name {
+        width: 49%;
+      }
+      .last-name {
+        width: 49%;
+      }
+
+      .email-address {
+        margin-top: 2.4rem;
+      }
+
+      .check-query {
+        display: flex;
+        justify-content: space-between;
+      }
+      .general-enquiry {
+        width: 49%;
+        display: inline-block;
+        padding: 1.5rem;
+        border: solid 1px #333;
+        border-radius: 1rem;
+        text-align: left;
+      }
+      .support-request {
+        width: 49%;
+        display: inline-block;
+        padding: 1.5rem;
+        border: solid 1px #333;
+        border-radius: 1rem;
+      }
+      .query {
+        display: block;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+      }
+      .query-label:before,
+      .support-label:before,
+      .contact-label:before {
+        content: " ";
+        display: inline-block;
+        width: 2rem;
+      }
+
+      .message label {
+        display: inline-block;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+      }
+      .message input {
+        padding-left: 1rem;
+        padding-bottom: 6rem;
+        margin-bottom: 3rem;
+      }
+      .contact {
+        display: inline-block;
+        padding-left: 0.5rem;
+        margin-bottom: 3rem;
+      }
+      .btn-submit {
+        display: block;
+        width: 100%;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        border: none;
+        background-color: hsl(169, 82%, 27%);
+        color: hsl(148, 38%, 91%);
+        font-size: 1.6rem;
+        transition: all 0.3s;
+      }
+      .btn-submit:hover {
+        background-color: hsl(169, 73%, 43%);
+        /* color: hsl(169, 82%, 27%); */
+        transform: translateY(-2px);
+      }
+      .btn-submit:active,
+      .btn-submit:focus {
+        background-color: hsl(0, 66%, 54%);
+      }
+      .hidden {
+        display: none;
+      }
+      .modal {
+        /* position: absolute; */
+        /* top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%; */
+
+        background-color: white;
+        padding: 6rem;
+        border-radius: 5px;
+        box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+        z-index: 10;
+      }
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(3px);
+        z-index: 5;
+      }
+
+      @media (max-width: 37rem) {
+        html {
+          font-size: 56.25%;
+        }
+        section {
+          width: 55vh;
+          /* transform: translateY(1rem); */
+        }
+        .container {
+          transform: translateY(34%);
+        }
+        .first-last-name {
+          display: flex;
+          flex-direction: column;
+        }
+        .first-name {
+          width: 100%;
+          margin-bottom: 2rem;
+        }
+        .last-name {
+          width: 100%;
+        }
+
+        .check-query {
+          display: flex;
+          flex-direction: column;
+        }
+        .general-enquiry {
+          width: 100%;
+          margin-bottom: 1.5rem;
+        }
+
+        .support-request {
+          width: 100%;
+        }
+      }
+
+      .modal {
+        position: absolute;
+        background-color: hsl(187, 24%, 22%);
+        color: white;
+        font-size: 1.6rem;
+        border: none;
+        border-radius: 2rem;
+        padding: 1.5rem;
+        width: 60vh;
+        /* z-index: 10; */
+        top: 0;
+        right: 54rem;
+        margin-top: 1rem;
+      }
+      .modal img {
+        width: 1.8rem;
+        margin-bottom: 1.4rem;
+      }
+      .p1 {
+        font-weight: 500;
+        font-size: 1.8rem;
+      }
+      .p2 {
+        font-weight: 300;
+      }
+      .modal-img {
+        display: flex;
+        justify-content: left;
+        gap: 2rem;
+      }
+      /* .general-enquiry {} */
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <form id="myForm" novalidate>
+          <p>Contact Us</p>
+
+          <div class="first-last-name">
+            <div class="form-example first-name">
+              <label for="firstName">First Name <span>*</span></label>
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                required
+                class="input"
+              />
+              <div class="error-message" id="error-firstName"></div>
+            </div>
+
+            <div class="form-example last-name">
+              <label for="lastName">Last Name <span>*</span></label>
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                required
+                class="input"
+              />
+              <div class="error-message" id="error-lastName"></div>
+            </div>
+          </div>
+
+          <div class="form-example email-address">
+            <label for="email">Email Address <span>*</span></label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required
+              class="input"
+            />
+            <div class="error-message" id="error-email"></div>
+          </div>
+
+          <label for="query" class="query">Query Type <span>*</span></label>
+          <div class="check-query">
+            <div class="form-example general-enquiry">
+              <input type="radio" name="queryType" id="query" value="general" />
+              <label for="query" class="query-label">General Enquiry</label>
+            </div>
+
+            <div class="form-example support-request">
+              <input
+                type="radio"
+                name="queryType"
+                id="supportRequest"
+                value="support"
+              />
+              <label for="supportRequest" class="support-label"
+                >Support Request</label
+              >
+            </div>
+          </div>
+          <div class="error-message" id="error-queryType"></div>
+
+          <div class="form-example message">
+            <label for="message">Message <span>*</span></label>
+            <input
+              type="text"
+              name="message"
+              id="message"
+              required
+              class="input"
+            />
+            <div class="error-message" id="error-message"></div>
+          </div>
+
+          <div class="form-example contact">
+            <input type="checkbox" name="contact" id="contact" required />
+            <label for="contact" class="contact-label">
+              I consent to being contacted by the team <span>*</span>
+            </label>
+            <div class="error-message" id="error-contact"></div>
+          </div>
+
+          <button class="btn-submit">Submit</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="modal hidden">
+      <button class="close-modal hidden">&times;</button>
+      <div class="modal-img">
+        <img src="assets/images/icon-success-check.svg" />
+        <p class="p1">Message sent!</p>
+      </div>
+      <p class="p2">Thanks for completing the form! 🎉🎉🎉</p>
+    </div>
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+      Coded by <a href="https://github.com/PaJuloyDedys">M_Oksentiuk</a>.
+    </div>
+
+    <div class="overlay hidden"></div>
+    <script>
+      const form = document.getElementById("myForm");
+      const modal = document.querySelector(".modal");
+      const overlay = document.querySelector(".overlay");
+      const btnCloseModal = document.querySelector(".close-modal");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        let valid = true;
+
+        // Clear previous errors
+        document.querySelectorAll(".error-message").forEach((el) => {
+          el.textContent = "";
+        });
+
+        document.querySelectorAll("input").forEach((el) => {
+          el.classList.remove("error");
+        });
+
+        // Get values
+        const firstName = form.firstName.value.trim();
+        const lastName = form.lastName.value.trim();
+        const email = form.email.value.trim();
+        const message = form.message.value.trim();
+        const contact = form.contact.checked;
+        const queryType = document.querySelector(
+          'input[name="queryType"]:checked'
+        );
+
+        // Validate each field
+        if (firstName === "") {
+          valid = false;
+          showError("firstName", "This field is required");
+        }
+
+        if (lastName === "") {
+          valid = false;
+          showError("lastName", "This field is required");
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          valid = false;
+          showError("email", "Please enter a valid email address");
+        }
+
+        if (!queryType) {
+          valid = false;
+          showError("queryType", "Please select a query type");
+        }
+
+        if (message === "") {
+          valid = false;
+          showError("message", "This field is required");
+        }
+
+        if (!contact) {
+          valid = false;
+          showError(
+            "contact",
+            "To submit this form, please consent to being contacted"
+          );
+        }
+
+        if (valid) {
+          modal.classList.remove("hidden");
+          overlay.classList.remove("hidden");
+          form.reset();
+        }
+      });
+
+      function showError(fieldId, message) {
+        const input = document.getElementById(fieldId);
+        const errorDiv = document.getElementById(`error-${fieldId}`);
+        input?.classList.add("error");
+        if (errorDiv) {
+          errorDiv.textContent = message;
+        }
+      }
+
+      // Modal close logic
+      const closeModal = function () {
+        modal.classList.add("hidden");
+        overlay.classList.add("hidden");
+      };
+
+      btnCloseModal.addEventListener("click", closeModal);
+      overlay.addEventListener("click", closeModal);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+          closeModal();
+        }
+      });
+    </script>
+  </body>
+</html>
